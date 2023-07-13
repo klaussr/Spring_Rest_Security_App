@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .antMatchers(AUTH_ENDPOINT).permitAll()
                 //-----------------
-                .antMatchers(HttpMethod.GET, USERS_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole(Role.ADMIN.name())
+                .antMatchers(USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
                 //-----------------
                 .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name(), Role.USER.name())
                 .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole(Role.ADMIN.name())
