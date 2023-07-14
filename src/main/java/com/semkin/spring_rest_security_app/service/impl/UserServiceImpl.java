@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         newUser.setUserName(user.getUserName());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setRole(user.getRole());
+        newUser.setRoles(user.getRoles());
         newUser.setStatus(Status.ACTIVE);
         User registeredUser = userRepository.save(user);
         log.info("Create - user: {} successfully registered", registeredUser);

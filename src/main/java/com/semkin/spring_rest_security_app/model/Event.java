@@ -1,12 +1,11 @@
 package com.semkin.spring_rest_security_app.model;
 
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -14,12 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "events")
-public class Event {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Event extends BaseEntity{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -28,14 +22,6 @@ public class Event {
     @JoinColumn(name = "file_id")
     private File file;
 
-    @CreatedDate
-    @Column(name = "created")
-    private LocalDateTime created;
-    @LastModifiedDate
-    @Column(name = "updated")
-    private LocalDateTime updated;
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
+
 }
 

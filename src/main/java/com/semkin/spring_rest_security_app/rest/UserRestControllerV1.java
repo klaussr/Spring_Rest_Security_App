@@ -30,16 +30,6 @@ public class UserRestControllerV1 {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<UserDto> getUserByName(@PathVariable String name) {
-        User user = userService.findByUsername(name);
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        UserDto result = UserDto.fromUser(user);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
     @GetMapping
     public ResponseEntity<List<UserDto>> getAll() {
         List<User> users = userService.getAll();

@@ -1,6 +1,5 @@
 package com.semkin.spring_rest_security_app.config;
 
-import com.semkin.spring_rest_security_app.model.Role;
 import com.semkin.spring_rest_security_app.security.jwt.JwtConfigurer;
 import com.semkin.spring_rest_security_app.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private static final String AUTH_ENDPOINT = "/api/v1/auth/**";
-    private static final String USERS_ENDPOINT = "/api/v1/users/**";
-    private static final String EVENTS_ENDPOINT = "/api/v1/events/**";
-    private static final String FILES_ENDPOINT = "/api/v1/files/**";
+    private static final String USERS_ENDPOINT = "/api/v1/users";
+    private static final String EVENTS_ENDPOINT = "/api/v1/events";
+    private static final String FILES_ENDPOINT = "/api/v1/files";
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -41,25 +40,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .antMatchers(AUTH_ENDPOINT).permitAll()
                 //-----------------
-                .antMatchers(USERS_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, USERS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
+                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
                 //-----------------
-                .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, EVENTS_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name())
-                .antMatchers(HttpMethod.DELETE, EVENTS_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
+                .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+                .antMatchers(HttpMethod.DELETE, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
                 //-----------------
-                .antMatchers(HttpMethod.GET, FILES_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name(), Role.USER.name())
-                .antMatchers(HttpMethod.POST, FILES_ENDPOINT).hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.PUT, FILES_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name())
-                .antMatchers(HttpMethod.DELETE, FILES_ENDPOINT).hasAnyRole(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.GET, FILES_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
+                .antMatchers(HttpMethod.POST, FILES_ENDPOINT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+                .antMatchers(HttpMethod.DELETE, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
                 //-----------------
                 .anyRequest()
                 .authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
+        System.out.println(http);
     }
 
     @Override
