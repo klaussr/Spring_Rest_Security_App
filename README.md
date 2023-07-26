@@ -8,7 +8,7 @@ File (id, location, Status status ...)
 User -> … List<Events> events ...
 
 
-Взаимодействие с S3 должно быть реализовано с помощью AWS SDK.
+Взаимодействие с S3 реализовано с помощью AWS SDK.
 
 
 Уровни доступа:
