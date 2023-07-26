@@ -18,8 +18,6 @@ import static com.amazonaws.auth.profile.internal.ProfileKeyConstants.AWS_SECRET
 public class S3Config {
     @Bean
     public AmazonS3 s3client() {
-        System.out.println(System.getenv(AWS_ACCESS_KEY_ID));
-        System.out.println(System.getenv(AWS_SECRET_ACCESS_KEY));
 
         AWSCredentials credentials = new BasicAWSCredentials(
                 System.getenv(AWS_ACCESS_KEY_ID),

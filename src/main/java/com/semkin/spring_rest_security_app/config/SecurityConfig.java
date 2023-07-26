@@ -41,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(AUTH_ENDPOINT).permitAll()
                 //-----------------
                 .antMatchers(HttpMethod.GET, USERS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
-                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
                 //-----------------
                 .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
                 .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole("ADMIN")

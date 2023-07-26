@@ -6,6 +6,7 @@ import com.semkin.spring_rest_security_app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class UserRestControllerV1 {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> save(@RequestBody User user) {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,6 +52,7 @@ public class UserRestControllerV1 {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
         if (id == null || user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -58,6 +61,7 @@ public class UserRestControllerV1 {
         return new ResponseEntity(updateUser, HttpStatus.OK);
     }
 
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         if (id == null) {
