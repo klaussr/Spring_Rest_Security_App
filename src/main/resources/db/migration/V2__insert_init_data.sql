@@ -8,13 +8,13 @@ INSERT INTO users (id, user_name, email, password, created, updated, status)
 VALUES (3, 'Admin', 'admin@mail.ru', '$2a$09$RlByfKFjy.8ypkML7LPVc.r7dPa8uiCcYVdwOL1fs2FsHw2f1idtW', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
 
 INSERT INTO roles (id, name, created, updated, status)
-VALUES (1, 'ADMIN',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
+VALUES (1, 'ROLE_ADMIN',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
 
 INSERT INTO roles (id, name, created, updated, status)
-VALUES (2, 'MODERATOR',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
+VALUES (2, 'ROLE_MODERATOR',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
 
 INSERT INTO roles (id, name, created, updated, status)
-VALUES (3, 'USER',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
+VALUES (3, 'ROLE_USER',  CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),  'ACTIVE');
 
 INSERT INTO user_roles (user_id, role_id)
 VALUES (1, 3);

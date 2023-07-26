@@ -5,7 +5,6 @@ import com.semkin.spring_rest_security_app.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,20 +39,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .antMatchers(AUTH_ENDPOINT).permitAll()
                 //-----------------
-                .antMatchers(HttpMethod.GET, USERS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
-//                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET, USERS_ENDPOINT).hasAnyRole("MODERATOR", "ROLE_ADMIN", "ROLE_USER")
+//                .antMatchers(HttpMethod.POST, USERS_ENDPOINT).hasRole("ROLE_ADMIN")
+//                .antMatchers(HttpMethod.PUT, USERS_ENDPOINT).hasRole("ROLE_ADMIN")
+//                .antMatchers(HttpMethod.DELETE, USERS_ENDPOINT).hasRole("ROLE_ADMIN")
                 //-----------------
-                .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
-                .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
-                .antMatchers(HttpMethod.DELETE, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
-                //-----------------
-                .antMatchers(HttpMethod.GET, FILES_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
-                .antMatchers(HttpMethod.POST, FILES_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
-                .antMatchers(HttpMethod.DELETE, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+//                .antMatchers(HttpMethod.GET, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
+//                .antMatchers(HttpMethod.POST, EVENTS_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PUT, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+//                .antMatchers(HttpMethod.DELETE, EVENTS_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+//                //-----------------
+//                .antMatchers(HttpMethod.GET, FILES_ENDPOINT).hasAnyRole("ADMIN", "USER", "MODERATOR")
+//                .antMatchers(HttpMethod.POST, FILES_ENDPOINT).hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PUT, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
+//                .antMatchers(HttpMethod.DELETE, FILES_ENDPOINT).hasAnyRole("ADMIN", "MODERATOR")
                 //-----------------
                 .anyRequest()
                 .authenticated()

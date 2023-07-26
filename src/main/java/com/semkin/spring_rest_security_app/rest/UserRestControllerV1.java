@@ -42,7 +42,7 @@ public class UserRestControllerV1 {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> save(@RequestBody User user) {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class UserRestControllerV1 {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
         if (id == null || user == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -61,7 +61,7 @@ public class UserRestControllerV1 {
         return new ResponseEntity(updateUser, HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         if (id == null) {

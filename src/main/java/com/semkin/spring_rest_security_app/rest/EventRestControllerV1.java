@@ -46,6 +46,7 @@ public class EventRestControllerV1 {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Event> save(@RequestBody Event event) {
         if (event == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -55,6 +56,7 @@ public class EventRestControllerV1 {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<Event> update(@PathVariable Long id, @RequestBody Event event) {
         if (id == null || event == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -64,6 +66,7 @@ public class EventRestControllerV1 {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity delete(@PathVariable Long id) {
         if (id == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

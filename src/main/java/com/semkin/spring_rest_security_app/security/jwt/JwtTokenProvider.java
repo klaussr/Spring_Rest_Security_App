@@ -55,14 +55,7 @@ public class JwtTokenProvider {
                 .setExpiration(validity)//
                 .signWith(SignatureAlgorithm.HS256, secret)//
                 .compact();
-        System.out.println(jwts);
         return jwts;
-//        return Jwts.builder()//
-//                .setClaims(claims)//
-//                .setIssuedAt(now)//
-//                .setExpiration(validity)//
-//                .signWith(SignatureAlgorithm.HS256, secret)//
-//                .compact();
     }
 
     public Authentication getAuthentication(String token) {

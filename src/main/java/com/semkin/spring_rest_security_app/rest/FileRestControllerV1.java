@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,6 +31,7 @@ public class FileRestControllerV1 {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity delete(@PathVariable String fileName) {
         if (fileName == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -39,6 +41,7 @@ public class FileRestControllerV1 {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<FileDto> upload(@RequestBody @NonNull FileDto fileDto) {
         fileService.upload(fileDto.toFile());
         return new ResponseEntity("File Uploaded Successfully",HttpStatus.OK);
@@ -46,6 +49,7 @@ public class FileRestControllerV1 {
 
 
     @PutMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public ResponseEntity<?> download(@RequestBody @NonNull FileDto fileDto) {
         if (StringUtils.hasText(fileDto.getFilename())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File name is missing");
